@@ -53,10 +53,14 @@ Then at the end of the system call table located in [yourpathto]/linux-4.0.5/arc
 Now everything can be compiled (it takes a while, depending on your configuration) 
 > sudo -s 
 [password]
+
 > make menuconfig
+
 > cd [yourpathto]/linux-4.0.5/
+
 > make
 [wait a while]
+
 > make modules_install install
 
 
