@@ -25,7 +25,7 @@ malloc and free are replaced by their kernel counterparts kmalloc() and kfree().
 The semantic session was built mostly by modifying existing files:
 - fs.h was modified to include a pointer to a struct sessione in the definition of the struct file
 - namei.c: following the path through which the kernel opens a file, if a specified flag was present (O_SESSION, added inside the opensession.c definition), the allocation for memory is done accordingly. kmalloc is used along with __get_free_pages() to store two whole pages from the buddy system. 
-During the opening of the file, the whole content is then read into the newly allocated buffer, via vfs_read and the maniuplation of the memory boundaries with set_fs().
+During the opening of the file, the whole content is then read into the newly allocated buffer, via vfs_read and the manipulation of the memory boundaries with set_fs().
 - file_table.c: following this time the path through which the kernel closes a file, we need to close the session as well, when open. The file needs to be firstly truncated, then flushed to disk and lastly the resources need to be freed.
 - read_write.c: here all the operations of reading and writing from file are handled within volatile memory, so that a read and a write do not have to go back to the buffer cache (or in the worst case to the disk). 
 
@@ -64,4 +64,4 @@ Now everything can be compiled (it takes a while, depending on your configuratio
 > make modules_install install
 
 
-After a reboot, the new kernel should be running, and the approriate tests can be run
+After a reboot, the new kernel should be running, and the appropriate tests can be run
